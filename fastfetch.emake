@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+PACKAGE_NAME="fastfetch"
+PACKAGE_DESCRIPTION='A maintained, feature-rich and performance oriented, neofetch like system information tool.'
+PACKAGE_VERSION="v2.52.0"
+PACKAGE_URI="https://github.com/fastfetch-cli/fastfetch"
+PACKAGE_DEPENDENCIES=(
+    git
+    cmake
+)
+PACKAGE_ARCH="any"
+
+prepare() {
+    git clone $PACKAGE_URI $TMP
+    cd $TMP
+    mkdir -p build
+    cd build
+
+}
+
+build() {
+    cmake ..
+    cmake --build . --target fastfetch
+}
+
+finish() {
+    install fastfetch /usr/bin
+}

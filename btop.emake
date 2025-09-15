@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+PACKAGE_NAME="btop"
+PACKAGE_DESCRIPTION='A monitor of resources'
+PACKAGE_VERSION="v1.4.4"
+PACKAGE_URI="https://github.com/aristocratos/btop"
+PACKAGE_DEPENDENCIES=(
+    git
+    coreutils
+)
+PACKAGE_ARCH="any"
+
+prepare() {
+    git clone $PACKAGE_URI $TMP
+    cd $TMP
+    mkdir -p build
+    cd build
+
+}
+
+build() {
+    make
+}
+
+finish() {
+    install btop /usr/bin
+}

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+PACKAGE_NAME="ats"
+PACKAGE_DESCRIPTION="About This System"
+PACKAGE_VERSION="v1.00"
+PACKAGE_URI="https://github.com/nuros-linux/ats"
+PACKAGE_DEPENDENCIES=(
+    meson
+    vala
+    gtk4-devel
+    libadwaita-devel
+    glib2-devel
+    libcpuid-devel
+    libgee-devel
+)
+PACKAGE_ARCH="any"
+
+prepare() {
+    TMP_DIR="$TMP/$PACKAGE_NAME"
+    mkdir -p "$TMP_DIR"
+    git clone "$PACKAGE_URI" "$TMP_DIR"
+    cd "$TMP_DIR"
+}
+
+build() {
+    meson setup builddir
+    meson compile -C builddir
+}
+
+finish() {
+    meson install -C builddir
+    epkg-print success "$PACKAGE_NAME installed successfully"
+}
