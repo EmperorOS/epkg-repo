@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+PACKAGE_NAME="git"
+PACKAGE_DESCRIPTION='Distributed version control system.'
+PACKAGE_VERSION="v2.51.0"
+PACKAGE_URI="https://github.com/git/git"
+PACKAGE_DEPENDENCIES=(
+    curl
+    make
+    gcc
+    gettext
+    asciidoc
+    xmlto
+    perl
+)
+PACKAGE_ARCH="any"
+
+prepare() {
+    git clone $PACKAGE_URI $TMP
+    cd $TMP
+    make configure
+    ./configure --prefix=/usr
+}
+
+build() {
+    make all
+}
+
+finish() {
+    make install
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+PACKAGE_NAME="neofetch"
+PACKAGE_DESCRIPTION='???'
+PACKAGE_VERSION="???"
+PACKAGE_URI="https://github.com/dylanaraps/neofetch"
+PACKAGE_DEPENDENCIES=(
+    
+)
+PACKAGE_ARCH="any"
+
+prepare() {
+    epkg-print error "neofetch is outdated! Try fastfetch."
+    exit 1
+}
+
+build() {
+
+}
+
+finish() {
+
+}
